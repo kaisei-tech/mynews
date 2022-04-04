@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Profile;
 
+use App\Update;
+
+use Carbon\Carbon;
+
 
 class ProfileController extends Controller
 {
@@ -71,6 +75,12 @@ class ProfileController extends Controller
       unset($profile_form['_token']);
       // 該当するデータを上書きして保存する
       $profile->fill($profile_form)->save();
+      
+       $update = new Update();
+        $update->profile_id = $profile->id;
+        $update->edited_at = Carbon::now();
+        $update->save();
+        
       return redirect('admin/profile');
   }
   
@@ -81,6 +91,6 @@ class ProfileController extends Controller
       $profile = Profile::find($request->id);
       // 削除する
       $profile->delete();
-      return redirect('admin/news/');
+      return redirect('admin/profile/');
   }
 }
