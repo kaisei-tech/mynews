@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>プロフィール編集</h2>
-                <form action="{{ action('Admin\ProfileController@create') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ action('Admin\ProfileController@update') }}" method="post" enctype="multipart/form-data">
 
                     @if (count($errors) > 0)
                         <ul>
@@ -18,28 +18,28 @@
                     <div class="form-group row">
                         <label class="col-md-2">氏名</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                            <input type="text" class="form-control" name="name" value="{{ old('name', $profile->name) }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">性別</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="gender" value="{{ old('gender') }}">
+                            <input type="text" class="form-control" name="gender" value="{{ old('gender', $profile->gender) }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">趣味</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="hobby" value="{{ old('hobby') }}">
+                            <input type="text" class="form-control" name="hobby" value="{{ old('hobby', $profile->hobby) }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">自己紹介</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="introduction" rows="20">{{ old('introduction') }}</textarea>
+                            <textarea class="form-control" name="introduction" rows="20">{{ old('introduction', $profile->introduction) }}</textarea>
                         </div>
                     </div>
-                    
+                    <input type="hidden" name="id" value="{{ $profile->id }}">
                     {{ csrf_field() }}
                     <input type="submit" class="btn btn-primary" value="更新">
                 </form>
@@ -48,8 +48,8 @@
                     <div class="col-md-4 mx-auto">
                         <h2>更新履歴</h2>
                         <ul class="list-group">
-                            @if ($profile_form->updates != NULL)
-                                @foreach ($profile_form->updates as $update)
+                            @if ($profile->updates != NULL)
+                                @foreach ($profile->updates as $update)
                                     <li class="list-group-item">{{ $update->edited_at }}</li>
                                 @endforeach
                             @endif
