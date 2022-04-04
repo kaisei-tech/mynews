@@ -32,9 +32,10 @@
                         <thead>
                             <tr>
                                 <th width="10%">ID</th>
-                                <th width="20%">タイトル</th>
-                                <th width="50%">本文</th>
-                                <th width="10%">操作</th>
+                                <th width="10%">名前</th>
+                                <th width="10%">性別</th>
+                                <th width="20%">趣味</th>
+                                <th width="50%">自己紹介</th>
                             </tr>
                         </thead>
                         <tbody>
